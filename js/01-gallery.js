@@ -18,16 +18,24 @@ const allItems = galleryItems.map((galleryItem) => {
 //dodano galerie obrazków
 gallery.innerHTML = allItems;
 
+const instance = basicLightbox.create(`
+    <div class="modal">
+        <p>
+            Your first lightbox with just a few lines of code.
+            Yes, it's really that simple.
+        </p>
+    </div>
+`)
 
-// gallery.addEventListener("click") => {
-//     if (event.target.nodeName !== "IMG") {
-//         return;
-//     } {const instance = basicLightbox.create(`
-//     <img src="https://cdn.pixabay.com/photo/2019/05/14/16/43/flower-4202825_1280.jpg" width="800" height="600">`)
+instance.show()
 
-// instance.show()}
-// }
-
+gallery.addEventListener("click", event => {
+    event.preventDefault();
+    if (event.target.nodeName !== "IMG") {
+        return;
+    } 
+    event.src = event.dataset.source;
+}
 
 
 console.log(galleryItems);
