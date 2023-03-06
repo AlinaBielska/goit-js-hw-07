@@ -16,7 +16,8 @@ const allItems = galleryItems.map((galleryItem) => {
 
 
 //dodano galerie obrazków
-gallery.innerHTML = allItems;
+// gallery.innerHTML = allItems;
+gallery.insertAdjacentHTML("beforeend", allItems);
 
 
 gallery.addEventListener("click", event => {
@@ -25,7 +26,7 @@ gallery.addEventListener("click", event => {
         return;
     } 
 
-const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" >`);
+    const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" />`);
     instance.show();
     
     gallery.addEventListener("keydown", event => {
