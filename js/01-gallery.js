@@ -18,24 +18,29 @@ const allItems = galleryItems.map((galleryItem) => {
 //dodano galerie obrazków
 gallery.innerHTML = allItems;
 
-const instance = basicLightbox.create(`
-    <div class="modal">
-        <p>
-            Your first lightbox with just a few lines of code.
-            Yes, it's really that simple.
-        </p>
-    </div>
-`)
-
-instance.show()
 
 gallery.addEventListener("click", event => {
     event.preventDefault();
-    if (event.target.nodeName !== "IMG") {
+    const elem = event.target;
+    if (elem.nodeName !== 'IMG') {
         return;
     } 
-    event.src = event.dataset.source;
+    elem.src = elem.dataset.source;
+
+
+const instance = basicLightbox.create(elem.outerHTML);
+instance.show(keyDown());
+
+function keyDown() {
+    document.addEventListener('keydown', onModalCloseWithKeyDown);
 }
 
+function onModalCloseWithKeyDown(event) {
+    if (event.code === 'Escape') {
+      modal.close();
+      document.removeEventListener('keydown', onModalCloseWithKeyDown);
+    }
+  }
 
-console.log(galleryItems);
+});
+
