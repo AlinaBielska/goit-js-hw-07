@@ -21,26 +21,17 @@ gallery.innerHTML = allItems;
 
 gallery.addEventListener("click", event => {
     event.preventDefault();
-    const elem = event.target;
-    if (elem.nodeName !== 'IMG') {
+    if (event.target.nodeName !== 'IMG') {
         return;
     } 
-    elem.src = elem.dataset.source;
 
-
-const instance = basicLightbox.create(elem.outerHTML);
-instance.show(keyDown());
-
-function keyDown() {
-    document.addEventListener('keydown', onModalCloseWithKeyDown);
-}
-
-function onModalCloseWithKeyDown(event) {
-    if (event.code === 'Escape') {
-      modal.close();
-      document.removeEventListener('keydown', onModalCloseWithKeyDown);
-    }
-  }
-
-});
+const instance = basicLightbox.create(`<img src="${event.target.dataset.source}" >`);
+    instance.show();
+    
+    gallery.addEventListener("keydown", event => {
+        if (event.key === "Escape") {
+            instance.close();
+        }
+    });
+})
 
