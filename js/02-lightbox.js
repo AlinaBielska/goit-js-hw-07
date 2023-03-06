@@ -14,4 +14,4 @@ const allItems = galleryItems.map((galleryItem) => {
 
 gallery.innerHTML = allItems;
 
-
+var lightbox = new SimpleLightbox('.gallery a', {captionsData: 'alt', captionDelay: 250});
